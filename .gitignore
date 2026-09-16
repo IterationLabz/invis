@@ -1,0 +1,51 @@
+node_modules/
+app-source/
+dist/
+build/
+*.log
+.DS_Store
+config.json
+Cookies
+Cookies-journal
+DIPS
+Network Persistent State
+Preferences
+SharedStorage
+TransportSecurity
+Trust Tokens
+Trust Tokens-journal
+Cache/
+Code Cache/
+DawnGraphiteCache/
+DawnWebGPUCache/
+GPUCache/
+Local Storage/
+Session Storage/
+Shared Dictionary/
+blob_storage/
+*.dmg
+*.zip
+.vscode/
+
+# Local credentials and personal session materials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+output/
+.ppt-build/
+.ppt-output/
+.codex-finalizer/
+resources/viva/
+*.backup
+*.backup2
+*.bak
+*.patch
+coverage/
+system-prompt.local.md
+*.local.md
+
+# Private invisibility module: keep local, never force-add to the public repository.
+/window-privacy.js
+/native/window_privacy.mm

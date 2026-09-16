@@ -1,0 +1,84 @@
+{
+  "name": "invis",
+  "version": "9.0.0",
+  "description": "Open-source voice workspace for meeting recordings, transcripts, analysis, and dictation.",
+  "main": "meetings/main.js",
+  "scripts": {
+    "start": "electron .",
+    "viva": "electron viva/main.js",
+    "start:legacy": "electron main.js",
+    "test:viva": "node --test viva/test/*.test.js",
+    "check:viva": "node viva/check-services.js",
+    "build:viva": "electron-builder --dir --mac --config viva/builder.json",
+    "build": "electron-builder --config meetings/builder.json",
+    "rebuild": "node-gyp rebuild",
+    "install": "node -e \"console.log('Invis meeting workspace needs no native addons.')\"",
+    "test": "node --test meetings/test/*.test.js viva/test/*.test.js",
+    "check": "node scripts/check-syntax.js",
+    "build:dir": "electron-builder --dir --config meetings/builder.json",
+    "rebuild:legacy": "node-gyp rebuild"
+  },
+  "keywords": [
+    "electron",
+    "meeting",
+    "transcription",
+    "dictation",
+    "open-source",
+    "ai"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "44.3.0",
+    "electron-builder": "^26.15.3",
+    "node-gyp": "^12.4.0"
+  },
+  "dependencies": {
+    "bindings": "^1.5.0",
+    "electron-store": "^11.0.2",
+    "nan": "^2.22.0",
+    "ws": "^8.21.3"
+  },
+  "build": {
+    "appId": "org.invis.legacy",
+    "productName": "Invis Legacy",
+    "mac": {
+      "category": "public.app-category.productivity",
+      "icon": "resources/icons/icon.icns",
+      "target": [
+        "dmg"
+      ],
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "entitlements.mac.plist",
+      "entitlementsInherit": "entitlements.mac.plist",
+      "extendInfo": {
+        "NSCameraUsageDescription": "This app needs camera access for screenshots",
+        "NSScreenCaptureUsageDescription": "This app needs screen capture access for AI analysis",
+        "NSAppleEventsUsageDescription": "This app needs to control window behavior for privacy protection",
+        "LSUIElement": true
+      }
+    },
+    "files": [
+      "main.js",
+      "renderer.js",
+      "preload.js",
+      "index.html",
+      "styles.css",
+      "secure-storage.js",
+      "native-protection.js",
+      "process-protection.js",
+      "gpu-renderer.js",
+      "window-privacy.js",
+      "build/Release/*.node",
+      "resources/icons/**/*",
+      "viva/**/*",
+      "!viva/**/*.local.md",
+      "!viva/test/**/*",
+      "shared/**/*"
+    ]
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

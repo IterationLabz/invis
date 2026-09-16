@@ -1,0 +1,3 @@
+# Also exclude private modules from git archive if they were previously tracked.
+/window-privacy.js export-ignore
+/native/window_privacy.mm export-ignore
