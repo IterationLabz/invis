@@ -1,6 +1,18 @@
 # Invis
 
+<p align="center">
+  <img src="resources/icons/invis.iconset/icon_512x512.png" alt="Invis app logo" width="160" height="160">
+</p>
+
 A calm, open-source voice workspace for being more present in conversations. Record meetings, keep searchable transcripts, find decisions and next steps, and ask questions grounded in what was actually said.
+
+## Download Invis v1.0.0
+
+[Download for macOS Apple Silicon (.dmg)](https://github.com/IterationLabz/invis/releases/download/v1.0.0/Invis-1.0.0-mac-arm64.dmg) · [All release files and checksums](https://github.com/IterationLabz/invis/releases/latest)
+
+For Macs with an Apple M-series chip running **macOS 13 or newer**. Open the DMG, drag **Invis** to **Applications**, then launch it. Node.js and npm are not needed for the downloaded app. Press **Command+B** to reveal the floating controls, open the workspace, and configure your own Gemini key in **Settings**. See steps 2–5 below for first-use setup and an audio check.
+
+This initial build is **unsigned and not notarized**; macOS may block opening it. It is an early release, not a signed production installer. Windows, Linux, and Intel Mac installers are not included in this release; use the source instructions below on those platforms. Download the ZIP if you prefer an app archive, and use the published SHA-256 checksums to verify downloads.
 
 ## What you can do
 
@@ -17,14 +29,9 @@ This is a desktop foundation, not full feature parity with a commercial dictatio
 
 ### 1. Install and launch
 
-Install Node.js 22.12 or newer with npm. Clone this repository or download and extract its source, then open a terminal in the folder containing `package.json`. An internet connection is needed to install dependencies and use Gemini features. Local recording and transcript imports work offline after installation.
+Download the macOS installer above, open it, and drag **Invis** into **Applications**. Launch Invis from Applications. No terminal commands or Node.js installation are needed for the downloaded app. AI features require an internet connection; local recording and transcript imports work offline.
 
-```sh
-npm ci
-npm start
-```
-
-Keep that terminal running while using the app. The default meeting workspace needs no native-addon rebuild. macOS builds have been checked locally; Windows and Linux still need platform testing.
+If you want to run from source, follow [Development](#development). The default meeting workspace needs no native-addon rebuild. Windows and Linux still need platform testing.
 
 ### 2. Open the workspace
 
@@ -38,7 +45,7 @@ To try Invis without a key, create a meeting and turn off **Live transcription**
 
 ### 4. Add your own prompt
 
-Copy `system-prompt.example.md` to `system-prompt.local.md` in the repository root using your file manager or editor. Write your preferred assistant instructions below the comment and save the file. See [Write your own system prompt](#write-your-own-system-prompt) for suggestions. This step is optional, and you do not need to edit application code. The app reads changes on your next AI request.
+This step is optional. Downloaded apps work without a custom prompt. For source checkouts, copy `system-prompt.example.md` to `system-prompt.local.md` in the repository root and write your instructions below the comment. Packaged apps currently require a launch environment setting to use a custom prompt; there is no prompt editor in Settings. See [Write your own system prompt](#write-your-own-system-prompt) for both options. Add meeting-specific context in Notes instead if you prefer to stay in the app.
 
 ### 5. Check your audio before a real meeting
 
@@ -115,7 +122,11 @@ There is no Invis server or telemetry. Live transcription sends audio to Google'
 
 ## Development
 
+Install Node.js 22.12 or newer with npm. Clone this repository and open a terminal in its root directory.
+
 ```sh
+npm ci               # Install dependencies
+npm start            # Launch from source
 npm test              # Meeting, provider, recording, and existing viva regression tests
 npm run check         # JavaScript syntax validation
 npm run build:dir     # Build an unpacked desktop app for the current platform

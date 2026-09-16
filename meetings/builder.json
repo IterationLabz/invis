@@ -1,6 +1,7 @@
 {
   "appId": "org.invis.desktop",
   "productName": "Invis",
+  "artifactName": "Invis-${version}-${os}-${arch}.${ext}",
   "npmRebuild": false,
   "directories": {
     "output": "dist/invis"
@@ -14,7 +15,8 @@
   "mac": {
     "category": "public.app-category.productivity",
     "target": [
-      "dmg"
+      "dmg",
+      "zip"
     ],
     "hardenedRuntime": true,
     "entitlements": "entitlements.mac.plist",

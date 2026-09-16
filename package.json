@@ -1,6 +1,6 @@
 {
   "name": "invis",
-  "version": "9.0.0",
+  "version": "1.0.0",
   "description": "Open-source voice workspace for meeting recordings, transcripts, analysis, and dictation.",
   "main": "meetings/main.js",
   "scripts": {
