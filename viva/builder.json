@@ -1,0 +1,31 @@
+{
+  "appId": "org.invis.viva",
+  "productName": "Invis Viva",
+  "extraMetadata": {
+    "main": "viva/main.js"
+  },
+  "npmRebuild": false,
+  "directories": {
+    "output": "dist/viva"
+  },
+  "files": [
+    "viva/**/*",
+    "secure-storage.js",
+    "package.json",
+    "shared/**/*",
+    "!viva/test/**/*",
+    "!viva/**/*.local.md"
+  ],
+  "mac": {
+    "target": [
+      "dir"
+    ],
+    "hardenedRuntime": false,
+    "identity": null,
+    "extendInfo": {
+      "NSMicrophoneUsageDescription": "Invis transcribes your presentation when you start listening.",
+      "NSAudioCaptureUsageDescription": "Invis transcribes the meeting audio you select for viva questions.",
+      "NSScreenCaptureUsageDescription": "Invis uses your selected display as the source of meeting audio. Video is not sent to AI services."
+    }
+  }
+}

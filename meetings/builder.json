@@ -1,0 +1,40 @@
+{
+  "appId": "org.invis.desktop",
+  "productName": "Invis",
+  "npmRebuild": false,
+  "directories": {
+    "output": "dist/invis"
+  },
+  "files": [
+    "meetings/**/*",
+    "shared/**/*",
+    "!meetings/test/**/*",
+    "package.json"
+  ],
+  "mac": {
+    "category": "public.app-category.productivity",
+    "target": [
+      "dmg"
+    ],
+    "hardenedRuntime": true,
+    "entitlements": "entitlements.mac.plist",
+    "entitlementsInherit": "entitlements.mac.plist",
+    "extendInfo": {
+      "NSMicrophoneUsageDescription": "Invis records your microphone only when you start a recording.",
+      "NSAudioCaptureUsageDescription": "Invis records meeting audio you choose to capture.",
+      "NSScreenCaptureUsageDescription": "Invis uses your selected display to capture meeting audio. Video is neither saved nor sent to AI."
+    },
+    "icon": "resources/icons/invis.icns"
+  },
+  "win": {
+    "target": [
+      "nsis"
+    ]
+  },
+  "linux": {
+    "target": [
+      "AppImage"
+    ],
+    "category": "AudioVideo"
+  }
+}
