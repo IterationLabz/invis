@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; object-src 'none'">
+<title>Invis Viva</title><link rel="stylesheet" href="styles.css"></head>
+<body>
+<header><div><span class="brand">invis<span class="accent"> / </span>viva</span><span class="subtitle">Your presentation workspace</span></div><div class="header-actions"><button id="pdf">Open PDF</button><button id="settings">Settings</button><button id="hideWindow" title="Hide / show with Command+B">Hide</button><button id="quitWindow" title="Stop listening and quit">Quit</button></div></header>
+<main>
+<section class="control-bar" aria-label="Session controls">
+ <div class="phases"><button id="presentation" class="selected" aria-pressed="true">1 · Presentation</button><button id="qa" aria-pressed="false">2 · Q&A</button></div>
+ <div class="timer"><span id="clock">00:00</span><span id="timerHint">of 10:00</span><button id="timerToggle">Start timer</button></div>
+</section>
+<section class="audio-bar" aria-label="Audio capture">
+ <label><input id="useMic" type="checkbox" checked> My microphone <meter id="micLevel" min="0" max="1" value="0"></meter></label>
+ <select id="micDevice" aria-label="Microphone device"><option value="">Default microphone</option></select>
+ <label><input id="useMeeting" type="checkbox"> Meeting audio <meter id="meetingLevel" min="0" max="1" value="0"></meter></label>
+ <button id="listen" class="primary">Start listening</button>
+</section>
+<div class="status-row"><span id="status" role="status">Loading your viva context…</span><label class="transparency-control" title="0% = visible, 100% = fully transparent. Command+B restores visibility.">Transparency <input id="transparency" type="range" min="0" max="100" step="5" value="0" aria-label="Window transparency"><output id="transparencyValue">0%</output></label></div>
+<div id="error" class="error" role="alert" hidden></div>
+<div class="workspace">
+ <section class="left-panel">
+  <div class="tabs" role="tablist"><button id="scriptTab" role="tab" aria-selected="true">10-minute script</button><button id="transcriptTab" role="tab" aria-selected="false">Live transcript <span id="turnCount">0</span></button><button id="notesTab" role="tab" aria-selected="false">My notes</button></div>
+  <div id="scriptPanel" class="scroll-panel"><p class="hint">A rehearsal draft based on your records. Read naturally and adjust any wording to match what you can explain.</p><div id="script"></div></div>
+  <div id="transcriptPanel" class="scroll-panel" hidden><p id="emptyTranscript" class="empty">Your speech will appear here. Presentation mode collects context without generating answers.</p><div id="transcripts"></div></div>
+  <div id="notesPanel" class="scroll-panel" hidden><p class="hint">Add your own details or paste the script you actually plan to use. Notes are labelled separately from live speech.</p><textarea id="notes" maxlength="24000" placeholder="For example, clarify your personal role in Voice Agents or the planned security project work."></textarea><button id="saveNotes">Use these notes</button><span id="notesStatus"></span></div>
+ </section>
+ <section class="answer-panel">
+  <div class="answer-heading"><span class="eyebrow">QUESTION ASSISTANT</span><span id="answerStatus">Ready for rehearsal</span></div>
+  <div class="auto-controls"><label><input type="checkbox" id="autoAnswers" checked> Answer questions automatically in Q&A</label><label>Question source <select id="questionSource"><option value="meeting">Meeting audio</option><option value="microphone">Microphone (rehearsal)</option></select></label></div>
+  <div class="scroll-panel answer-scroll" aria-live="polite">
+   <div id="answerEmpty" class="empty"><h2>Your work, in your words.</h2><p>Start with the presentation script. Switch to Q&A when the examiner begins asking questions, or type a practice question below.</p><p class="hint">In a meeting, select meeting audio as the question source to avoid answering your own microphone speech.</p></div>
+   <div id="answerContent" hidden><p id="questionLabel" class="question"></p><h2 id="answerText"></h2><div id="followUpWrap"><span class="eyebrow">IF THEY ASK FOR MORE</span><p id="followUp"></p></div><p id="source" class="source"></p><p id="uncertainty" class="caveat" hidden></p></div>
+  </div>
+  <form id="askForm"><label for="question">Ask or correct a question</label><textarea id="question" rows="2" maxlength="8000" placeholder="How did you improve Mock Analysis?"></textarea><div class="ask-actions"><button type="button" id="cancelAnswer">Cancel</button><button type="submit" class="primary" id="ask">Answer question</button></div></form>
+ </section>
+</div>
+<footer><span>Audio and answer context go to Gemini. No audio is saved. Capture protection is enabled but may be bypassed on macOS: share only the PDF window and verify the sharing preview.</span><div><button id="export">Export session</button><button id="reset">New session</button></div></footer>
+</main>
+<dialog id="settingsDialog"><form id="settingsForm"><h2>Viva settings</h2><p id="keyStatus"></p><label>Gemini answer model<input id="answerModel" required pattern="[a-zA-Z0-9._-]+"></label><label>Gemini transcription model<select id="transcriptionModel"><option>gemini-3.5-transcribe-live</option></select></label><label>Replace Gemini key (optional)<input type="password" id="geminiKey" autocomplete="off" placeholder="Keep saved key"></label><p class="hint">Keys stay in the main process and are stored with macOS secure storage when changed.</p><div class="ask-actions"><button type="button" id="closeSettings">Cancel</button><button type="submit" class="primary">Save settings</button></div></form></dialog>
+<script src="renderer.js"></script></body></html>
