@@ -1,0 +1,20 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'none'"><title>Invis controls</title><link rel="stylesheet" href="dock.css"></head><body>
+<svg class="symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+ <symbol id="mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 10v1a6.5 6.5 0 0 0 13 0v-1M12 17.5V21M9 21h6"/></symbol>
+ <symbol id="record" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.8" class="fill"/></symbol>
+ <symbol id="spark" viewBox="0 0 24 24"><path d="m12 2 2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5Z"/></symbol>
+ <symbol id="library" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 9h16M9 9v11"/></symbol>
+ <symbol id="check" viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></symbol>
+ <symbol id="chevron" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+ <symbol id="close" viewBox="0 0 24 24"><path d="m7 7 10 10M17 7 7 17"/></symbol>
+</defs></svg>
+<button id="handle" aria-label="Expand Invis controls" title="Expand Invis controls" hidden><span class="handle-line"></span><span id="handleStatus"></span></button>
+<section id="strip" aria-label="Invis floating controls">
+ <div id="hoverGlow" aria-hidden="true"></div>
+ <div id="grip" title="Drag to move"><span class="grip-slot"></span></div>
+ <span class="signature" aria-hidden="true">INVIS</span>
+ <div id="idleActions"><button id="dictate" class="action dictate" aria-label="Start dictation" title="Dictate · Record a voice note"><span class="voice-orb"><svg class="mic-icon"><use href="#mic"/></svg><svg class="success-icon"><use href="#check"/></svg></span><span class="action-label">Speak</span></button><button id="meeting" class="action meeting" aria-label="Record a meeting" title="Meeting · Choose audio sources"><svg><use href="#record"/></svg><span class="action-label">Meet</span></button><button id="ask" class="action ask" aria-label="Ask AI" title="Ask AI about a meeting"><svg><use href="#spark"/></svg><span class="action-label">Think</span></button></div>
+ <div id="liveActions" hidden><button id="hide" class="quiet" aria-label="Hide controls; keep recording" title="Hide controls · Recording continues"><svg><use href="#close"/></svg></button><span id="liveLabel">REC</span><div id="wave" aria-label="Live audio level"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><output id="duration">00:00</output><button id="finish" class="finish" aria-label="Finish and save recording" title="Finish and save"><svg><use href="#check"/></svg></button></div>
+ <div id="busyActions" hidden><span class="spinner"><i></i></span><span id="busyLabel">SAVING</span></div>
+ <div id="footer"><button id="workspace" class="quiet workspace" aria-label="Open Invis workspace" title="Ready · Open your workspace"><svg><use href="#library"/></svg><span id="modeHint" aria-hidden="true">Ready</span><span id="statusDot"></span></button><button id="collapse" class="quiet collapse" aria-label="Collapse to edge handle" title="Collapse to edge handle"><svg><use href="#chevron"/></svg></button></div>
+</section><div id="liveStatus" role="status" class="sr-only"></div><script src="dock-renderer.js"></script></body></html>
