@@ -1,0 +1,41 @@
+COMPARISON: Suggested Code vs Current InvisAI Protection
+
+SUGGESTED APPROACH:
+1. Hidden window at screen-saver level
+2. Rename process to "Safari"
+3. Block all network requests
+4. Hook SCStream APIs (injecting into monitoring software)
+
+CURRENT INVISAI PROTECTION:
+1. CGShieldingWindowLevel (2147483629) - HIGHER than screen-saver
+2. Process spoofed as "Safari" + Bundle ID com.apple.Safari
+3. GPU framebuffer rendering (bypasses compositor)
+4. Window Privacy bypass (focus detection, process enumeration)
+5. LaunchAgent + Watchdog (auto-restart)
+6. NSWindowSharingNone (capture blocking)
+
+ANALYSIS:
+---------
+
+✅ ALREADY BETTER:
+- screen-saver level (7) vs CGShieldingWindowLevel (2147483629) - We're MUCH higher
+- process.title vs full process spoofing - We spoof bundle ID + hide from enumeration
+- We already have transparent:false + skipTaskbar:true
+
+⚠️ INTERESTING IDEAS:
+- Block network requests - Could prevent monitoring software from uploading evidence
+- Hook SCStream APIs - Direct API hooking (advanced but risky)
+
+❌ PROBLEMS WITH SUGGESTED APPROACH:
+- process.title only changes display name, not actual process info
+- net.request = null breaks Electron networking entirely
+- Hooking SCStream requires injecting into the monitoring process (detected by anti-tamper)
+- No auto-restart protection
+- No GPU rendering bypass
+
+VERDICT:
+Current InvisAI protection is SUPERIOR in every way except network blocking.
+
+RECOMMENDATION:
+Add network blocking for monitoring upload domains as Layer 7.
+Skip SCStream hooking (too risky, unnecessary with CGShieldingWindowLevel).

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InvisAI Assistant</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Title bar -->
+    <div class="titlebar">
+      <div class="titlebar-drag">
+        <span class="app-title">InvisAI</span>
+      </div>
+      <div class="titlebar-buttons">
+        <button class="titlebar-btn settings" id="settingsBtn" title="Settings">⚙️</button>
+        <button class="titlebar-btn minimize" id="minimizeBtn" title="Hide (Cmd+B)">−</button>
+        <button class="titlebar-btn close" id="closeBtn" title="Quit">×</button>
+      </div>
+    </div>
+
+    <!-- Chat container -->
+    <div class="chat-container" id="chatContainer">
+      <div class="welcome-message">
+        <h2>👋 Welcome to InvisAI</h2>
+        <p>Press <kbd>Cmd+B</kbd> to hide/show this window</p>
+        <p>Press <kbd>Cmd+Shift+B</kbd> to capture & analyze screenshot</p>
+        <p class="small">Configure your API key in settings to start chatting</p>
+      </div>
+    </div>
+
+    <!-- Settings panel (hidden by default) -->
+    <div class="settings-panel" id="settingsPanel" style="display: none;">
+      <h3>Settings</h3>
+      <div class="settings-group">
+        <label for="aiProvider">AI Provider:</label>
+        <select id="aiProvider"
+          style="width: 100%; padding: 8px; margin-top: 5px; border-radius: 4px; border: 1px solid #ddd;">
+          <option value="openai">OpenAI (GPT-4)</option>
+          <option value="gemini">Google Gemini (2.5 Flash)</option>
+        </select>
+      </div>
+      <div class="settings-group" id="openaiKeyGroup">
+        <label for="apiKey">OpenAI API Key:</label>
+        <input type="password" id="apiKey" placeholder="sk-...">
+      </div>
+      <div class="settings-group" id="geminiKeyGroup" style="display: none;">
+        <label for="geminiApiKey">Gemini API Key:</label>
+        <input type="password" id="geminiApiKey" placeholder="AIza...">
+      </div>
+      <div class="settings-group">
+        <label>
+          <input type="checkbox" id="screenshotProtection">
+          Screenshot Protection
+        </label>
+      </div>
+      <div class="settings-group">
+        <label>
+          <input type="checkbox" id="preventFocusSteal">
+          Prevent Focus Steal
+        </label>
+      </div>
+      <div class="settings-group">
+        <label>
+          <input type="checkbox" id="secureInput">
+          Secure Input (Anti-Keylogger)
+        </label>
+      </div>
+      <div class="settings-buttons">
+        <button class="btn btn-primary" id="saveSettingsBtn">Save</button>
+        <button class="btn btn-secondary" id="cancelSettingsBtn">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Input area -->
+    <div class="input-container">
+      <textarea id="messageInput" placeholder="Ask me anything... (Cmd+Enter to send)" rows="1"></textarea>
+      <button id="sendBtn" class="send-btn">
+        <span>→</span>
+      </button>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+
+</html>
